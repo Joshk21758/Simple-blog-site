@@ -16,7 +16,7 @@
 # next.js
 /.next/
 /out/
-src/lib/db.js
+
 
 # production
 /build
@@ -42,5 +42,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# files
+src/lib/db.js
 # files
 src/lib/db.js
