@@ -23,3 +23,13 @@ export const LoginFormSchema = z.object({
     .trim()
     .min(8, { error: "Password must be atleast 8 characters" }),
 });
+
+//Contact form schema
+export const ContactFormSchema = z.object({
+  names: z.string().trim(),
+  email: z.string().trim(),
+  message: z
+    .string()
+    .trim()
+    .min(5, { error: "Content must be more than 5 characters" }),
+});

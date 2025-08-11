@@ -2,12 +2,26 @@
 
 import { login } from "@/actions/auth";
 import { useActionState } from "react";
+import { MdLogin } from "react-icons/md";
 
 export default function Login() {
   const [state, action, isPending] = useActionState(login, undefined);
   return (
     <div>
-      <p className="title">Login</p>
+      <p
+        style={{
+          textAlign: "center",
+          fontSize: 45,
+          marginTop: 13,
+          marginBottom: 13,
+          fontWeight: 700,
+          marginRight: 35,
+          fontFamily: "serif",
+        }}
+      >
+        Login
+      </p>
+      <MdLogin size={75} className="login-icon" />
       <form action={action} className="form-class">
         <label className="label-class">Email</label>
         <input

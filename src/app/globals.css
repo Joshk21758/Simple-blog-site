@@ -31,7 +31,7 @@ body {
   margin-top: 13px;
   font-weight: 700;
   margin-bottom: 13px;
-  font-family: sans;
+  font-family: serif;
 }
 
 .header-class {
@@ -52,7 +52,7 @@ body {
   color: rgb(255, 255, 255);
   border-radius: 10px;
   align-content: center;
-  margin-right: 15px;
+  margin-right: 12px;
   font-size: 22px;
   text-align: center;
   font-weight: 600;
@@ -86,7 +86,7 @@ body {
 }
 
 .div-class {
-  margin-left: 1160px;
+  margin-left: 1020px;
   display: flex;
   flex-direction: row;
   margin-top: -30px;
@@ -101,11 +101,12 @@ body {
   margin-left: 508px;
   box-shadow: 1px 2px 4px black;
   background-color: rgb(246, 245, 243);
+  margin-top: 40px;
 }
 
 .label-class {
   margin-left: 18px;
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 500;
   margin-top: 20px;
   margin-bottom: -8px;
@@ -140,7 +141,7 @@ body {
 }
 
 .input-class:focus {
-  border-color: rgb(5, 127, 214);
+  border-color: rgb(2, 149, 253);
   border-width: 4px;
 }
 
@@ -241,4 +242,69 @@ body {
 
 .date-class {
   font-size: 16px;
+}
+
+.login-icon {
+  margin-left: 810px;
+  margin-top: -80px;
+}
+
+.account-icon {
+  margin-left: 953px;
+  margin-top: -83px;
+}
+
+.submit-btn {
+  margin-left: 18px;
+  height: 55px;
+  width: 155px;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  align-content: center;
+  font-size: 22px;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 30px;
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #171717;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  height: 490px;
+  width: 510px;
+  border-radius: 10px;
+  margin-left: 508px;
+  box-shadow: 1px 3px 4px black;
+  background-color: rgb(246, 245, 243);
+  margin-top: 20px;
+}
+
+.message-body {
+  height: 120px;
+  width: 470px;
+  border-color: rgb(0, 0, 0);
+  border-width: 3px;
+  border-radius: 8px;
+  margin-left: 18px;
+  margin-top: 15px;
+  padding-left: 13px;
+  font-size: 21px;
+  outline: none;
+}
+
+.message-body:focus {
+  border-color: rgb(2, 149, 253);
+  border-width: 4px;
+}
+
+.fon-icon {
+  margin-left: 860px;
+  margin-top: -75px;
 }

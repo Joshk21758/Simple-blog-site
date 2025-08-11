@@ -11,7 +11,7 @@ export default function Home() {
           marginBottom: 20,
         }}
       >
-        Recent Posts
+        Recent Posts 💭
       </p>
       <hr
         style={{

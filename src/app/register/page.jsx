@@ -2,12 +2,27 @@
 
 import { register } from "@/actions/auth";
 import { useActionState } from "react";
+import { MdPerson } from "react-icons/md";
 
 export default function Register() {
   const [state, action, isPending] = useActionState(register, undefined);
   return (
     <div>
-      <p className="title">Create An Account</p>
+      <p
+        style={{
+          textAlign: "center",
+          fontSize: 45,
+          marginTop: 13,
+          marginBottom: 13,
+          fontWeight: 700,
+          marginRight: 30,
+          fontFamily: "serif",
+          marginLeft: -30,
+        }}
+      >
+        Create An Account
+      </p>
+      <MdPerson size={73} className="account-icon" />
       <form action={action} className="form-class">
         <label className="label-class">Email</label>
         <input

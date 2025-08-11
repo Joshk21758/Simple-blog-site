@@ -4,6 +4,7 @@ import { getCollection } from "@/lib/db";
 import { LoginFormSchema, RegisterFormSchema } from "@/lib/schema";
 import { errors } from "jose";
 import { redirect } from "next/navigation";
+import bcrypt from "bcrypt";
 
 //Register server actions
 export async function register(state, formData) {

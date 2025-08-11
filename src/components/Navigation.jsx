@@ -7,6 +7,7 @@ export default function Navigation() {
       <div className="div-class">
         <NavLink label="Login" href="/login" />
         <NavLink label="Register" href="/register" />
+        <NavLink label="Contact" href="/contact" />
       </div>
     </div>
   );
