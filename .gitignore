@@ -42,7 +42,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# Ignore database config
+src/lib/db.js
+
 # files
 src/lib/sessions.js
-src/lib/db.js
+
 
