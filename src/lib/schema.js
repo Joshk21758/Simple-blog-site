@@ -33,3 +33,12 @@ export const ContactFormSchema = z.object({
     .trim()
     .min(5, { error: "Content must be more than 5 characters" }),
 });
+
+//Blog form schema
+export const BlogFormSchema = z.object({
+  title: z.string().trim(),
+  content: z
+    .string()
+    .trim()
+    .min(5, { error: "Content should be more than 5 characters" }),
+});

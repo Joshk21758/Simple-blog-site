@@ -58,11 +58,15 @@ export async function register(state, formData) {
     });
   } catch (error) {
     console.log("Failed to save user:", error);
+    return {
+      errors: {
+        email: "Failed to save user.",
+      },
+    };
   }
 
   //create a session
-  const session = await createSession(savedUser.insertedId);
-  console.log("Session created:", session);
+  await createSession(savedUser.insertedId);
 
   //redirect
   redirect("/dashboard");
