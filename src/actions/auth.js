@@ -5,6 +5,7 @@ import { LoginFormSchema, RegisterFormSchema } from "@/lib/schema";
 import { errors } from "jose";
 import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
+import { createSession } from "@/lib/sessions";
 
 //Register server actions
 export async function register(state, formData) {
@@ -49,8 +50,9 @@ export async function register(state, formData) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   //save user to the database
+  let savedUser;
   try {
-    const savedUser = await userCollection.insertOne({
+    savedUser = await userCollection.insertOne({
       email,
       password: hashedPassword,
     });
@@ -59,6 +61,8 @@ export async function register(state, formData) {
   }
 
   //create a session
+  const session = await createSession(savedUser.insertedId);
+  console.log("Session created:", session);
 
   //redirect
   redirect("/dashboard");
