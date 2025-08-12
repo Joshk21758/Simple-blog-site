@@ -3,8 +3,7 @@
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
 //check if db uri exists
-const dbUri =
-  "mongodb+srv://mwansa-kunda:cyb3rs3c00000@blogsite.ycwffrr.mongodb.net/?retryWrites=true&w=majority&appName=blogsite";
+const dbUri = process.env.DB_URI;
 if (!dbUri) {
   throw new Error("DB_URI is not defined in the environment variables");
 }
