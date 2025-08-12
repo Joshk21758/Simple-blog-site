@@ -43,6 +43,6 @@ yarn-error.log*
 next-env.d.ts
 
 # files
-src/lib/db
 src/lib/sessions.js
+src/lib/db.js
 

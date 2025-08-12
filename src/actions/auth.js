@@ -6,6 +6,7 @@ import { errors } from "jose";
 import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
 import { createSession } from "@/lib/sessions";
+import { cookies } from "next/headers";
 
 //Register server actions
 export async function register(state, formData) {
@@ -90,4 +91,14 @@ export async function login(state, formData) {
 
   //Extract form data
   const { email, password } = validatedFields.data;
+}
+
+//Logout server action
+export async function logout(formData) {
+  //Clear the session cookie
+  const cookieStore = await cookies();
+  cookieStore.delete("session");
+
+  //Redirect
+  redirect("/");
 }

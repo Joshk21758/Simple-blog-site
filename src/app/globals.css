@@ -215,7 +215,7 @@ body {
   border-radius: 13px;
   border-width: 2px;
   margin-left: 40px;
-  box-shadow: 1px 3px 4px black;
+  box-shadow: 2px 3px 4px black;
   margin-top: 30px;
   padding-left: 15px;
   padding-top: 10px;
@@ -224,8 +224,7 @@ body {
 .grid-class {
   display: grid;
   border-spacing: 10px;
-  columns: 3;
-  grid-row: auto;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .post-title {
@@ -311,4 +310,25 @@ body {
 .fon-icon {
   margin-left: 860px;
   margin-top: -75px;
+}
+
+.logout-btn {
+  padding-left: 23px;
+  padding-right: 23px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-top: -15px;
+  color: rgb(255, 255, 255);
+  border-radius: 10px;
+  align-content: center;
+  margin-right: 12px;
+  font-size: 22px;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #171717;
+  color: aqua;
 }

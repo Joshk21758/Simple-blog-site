@@ -1,10 +1,11 @@
+import PostCard from "@/components/PostCard";
 import { authUser } from "@/lib/authUser";
 import { getCollection } from "@/lib/db";
 import { ObjectId } from "mongodb";
 
 export default async function Details({ params }) {
   //get route params
-  const { id } = await params;
+  const { id } = params;
 
   //get auth user
   const user = await authUser();
@@ -23,6 +24,7 @@ export default async function Details({ params }) {
   return (
     <div>
       <p className="title">Post Details</p>
+      {post ? <PostCard post={post} /> : <p>Post not found</p>}
     </div>
   );
 }

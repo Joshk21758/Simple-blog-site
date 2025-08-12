@@ -1,5 +1,6 @@
 import { authUser } from "@/lib/authUser";
 import NavLink from "./NavLink";
+import { logout } from "@/actions/auth";
 
 export default async function Navigation() {
   //get auth user
@@ -11,7 +12,9 @@ export default async function Navigation() {
         <div className="div-class">
           <NavLink label="New Post" href="/postz/create" />
           <NavLink label="Dashboard" href="/dashboard" />
-          <NavLink label="Logout" href="/" />
+          <form action={logout}>
+            <button className="logout-btn">Logout</button>
+          </form>
         </div>
       ) : (
         <div className="div-class">
