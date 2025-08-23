@@ -2,7 +2,6 @@
 
 import { getCollection } from "@/lib/db";
 import { LoginFormSchema, RegisterFormSchema } from "@/lib/schema";
-import { errors } from "jose";
 import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
 import { createSession } from "@/lib/sessions";
@@ -59,11 +58,6 @@ export async function register(state, formData) {
     });
   } catch (error) {
     console.log("Failed to save user:", error);
-    return {
-      errors: {
-        email: "Failed to save user.",
-      },
-    };
   }
 
   //create a session

@@ -44,3 +44,56 @@ export async function createPost(state, formData) {
   //redirect
   redirect("/");
 }
+
+//update post server action
+export async function updatePost(state, formData) {
+  //check if user is authenticated
+  const user = await authUser();
+  if (!user) {
+    redirect("/login");
+  }
+
+  //Validate form data
+  const validatedFields = BlogFormSchema.safeParse({
+    title: formData.get("title"),
+    content: formData.get("content"),
+  });
+
+  //check if validation is success
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  //find the post
+  const postCollection = await getCollection("post");
+  let post;
+  post = await postCollection.findOne({
+    _id: ObjectId.createFromHexString(formData.get("postId")),
+  });
+
+  //Update the post to Db
+  try {
+    post = await postCollection.findOneAndUpdate({
+      $set: {
+        title: validatedFields.data.title,
+        content: validatedFields.data.content,
+      },
+    });
+  } catch (error) {
+    console.log("Failed to Update post");
+  }
+
+  //Redirect
+  redirect("/");
+}
+
+//Delete post server action
+export async function deletePost(formData) {
+  //check if user is authenticated
+  const user = await authUser();
+  if (!user) {
+    redirect("/login");
+  }
+}

@@ -8,6 +8,7 @@ export default function BlogForm() {
   return (
     <div>
       <form action={action} className="form-class">
+        <input type="hidden" name="postId" defaultValue="" />
         <label className="label-class">Title</label>
         <input
           type="text"
