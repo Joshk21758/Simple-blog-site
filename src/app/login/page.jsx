@@ -29,6 +29,7 @@ export default function Login() {
           name="email"
           className="input-class"
           placeholder="Enter your email"
+          defaultValue={state?.email}
         />
         {state?.errors?.email && <p className="errors">{state.errors.email}</p>}
         <label className="label-class">Password</label>

@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import bcrypt from "bcrypt";
 import { createSession } from "@/lib/sessions";
 import { cookies } from "next/headers";
+import { authUser } from "@/lib/authUser";
 
 //Register server actions
 export async function register(state, formData) {
@@ -73,7 +74,6 @@ export async function login(state, formData) {
   const validatedFields = LoginFormSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
-    confirmPassword: formData.get("confirmPassword"),
   });
 
   //check if validation is success
@@ -85,6 +85,13 @@ export async function login(state, formData) {
 
   //Extract form data
   const { email, password } = validatedFields.data;
+
+  //create a session
+  const user = await authUser();
+  await createSession(user);
+
+  //redirect
+  redirect("/dashboard");
 }
 
 //Logout server action

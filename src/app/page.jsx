@@ -11,7 +11,7 @@ export default async function Home() {
         style={{
           fontSize: 40,
           fontFamily: "sans",
-          marginLeft: 30,
+          marginLeft: 40,
           marginTop: 40,
           fontWeight: 700,
           marginBottom: 20,
@@ -19,14 +19,6 @@ export default async function Home() {
       >
         Recent Posts 💭
       </p>
-      <hr
-        style={{
-          height: 3,
-          width: 1400,
-          marginLeft: 30,
-          color: "black",
-        }}
-      />
       <div className="grid-class">
         {posts.map((post) => (
           <div key={post._id}>
