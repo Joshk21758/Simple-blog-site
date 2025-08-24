@@ -89,6 +89,7 @@ export async function login(state, formData) {
   const { email, password } = validatedFields.data;
 
   //create a session
+  //get auth user
   const user = await authUser();
   await createSession(user);
 
