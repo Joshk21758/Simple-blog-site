@@ -219,6 +219,8 @@ body {
   margin-top: 30px;
   padding-left: 15px;
   padding-top: 10px;
+  color: #ffffff;
+  background-color: rgb(0, 21, 45);
 }
 
 .grid-class {
@@ -229,14 +231,14 @@ body {
 
 .post-title {
   font-size: 30px;
-  color: black;
+  color: rgb(255, 255, 255);
   font-family: sans-serif;
   font-weight: 700;
 }
 
 .content-class {
-  font-size: 30px;
-  color: black;
+  font-size: 27px;
+  color: rgb(255, 255, 255);
   font-family: serif;
   font-style: italic;
 }
@@ -244,7 +246,7 @@ body {
 .date-class {
   font-size: 20px;
   font-style: italic;
-  margin-bottom: 30px;
+  margin-bottom: 27px;
 }
 
 .login-icon {

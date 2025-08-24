@@ -3,7 +3,6 @@
 import { authUser } from "@/lib/authUser";
 import { getCollection } from "@/lib/db";
 import { BlogFormSchema } from "@/lib/schema";
-import { errors } from "jose";
 import { ObjectId } from "mongodb";
 import { redirect } from "next/navigation";
 
@@ -25,6 +24,8 @@ export async function createPost(state, formData) {
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
+      title: formData.get("title"),
+      content: formData.get("content"),
     };
   }
 
@@ -57,12 +58,15 @@ export async function updatePost(state, formData) {
   const validatedFields = BlogFormSchema.safeParse({
     title: formData.get("title"),
     content: formData.get("content"),
+    postId: formData.get("postId"),
   });
 
   //check if validation is success
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
+      title: formData.get("title"),
+      content: formData.get("content"),
     };
   }
 
@@ -76,6 +80,7 @@ export async function updatePost(state, formData) {
   //Update the post to Db
   try {
     post = await postCollection.findOneAndUpdate({
+      post,
       $set: {
         title: validatedFields.data.title,
         content: validatedFields.data.content,

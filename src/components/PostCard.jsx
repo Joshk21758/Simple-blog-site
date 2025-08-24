@@ -4,7 +4,11 @@ export default function PostCard({ post }) {
   return (
     <div>
       <div className="border-class">
-        <p className="date-class">{post._id.getTimestamp().toLocaleString()}</p>
+        <p className="date-class">
+          {post._id.getTimestamp
+            ? post._id.getTimestamp().toLocaleString()
+            : "No timestamp available"}
+        </p>
         <Link
           className="post-title"
           href={`postz/details/${post._id.toString()}`}
