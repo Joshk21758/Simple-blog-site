@@ -1,6 +1,7 @@
+import { createPost } from "@/actions/posts";
 import BlogForm from "@/components/BlogForm";
 
-export default function Create() {
+export default function Create({ post }) {
   return (
     <div>
       <p
@@ -15,7 +16,7 @@ export default function Create() {
       >
         Create a Post
       </p>
-      <BlogForm />
+      <BlogForm handler={createPost} post={post} />
     </div>
   );
 }

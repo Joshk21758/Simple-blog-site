@@ -5,6 +5,7 @@ import { getCollection } from "@/lib/db";
 import { BlogFormSchema } from "@/lib/schema";
 import { ObjectId } from "mongodb";
 import { redirect } from "next/navigation";
+import { z } from "zod";
 
 //create post server action
 export async function createPost(state, formData) {
@@ -15,17 +16,20 @@ export async function createPost(state, formData) {
   }
 
   //Validate form data
+  const title = formData.get("title");
+  const content = formData.get("content");
+
   const validatedFields = BlogFormSchema.safeParse({
-    title: formData.get("title"),
-    content: formData.get("content"),
+    title,
+    content,
   });
 
   //check if validation is success
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      title: formData.get("title"),
-      content: formData.get("content"),
+      title,
+      content,
     };
   }
 
@@ -49,49 +53,54 @@ export async function createPost(state, formData) {
 //update post server action
 export async function updatePost(state, formData) {
   //check if user is authenticated
-  const user = await authUser();
+  const user = authUser();
   if (!user) {
     redirect("/login");
   }
 
-  //Validate form data
+  //validate form fields
+  const title = formData.get("title");
+  const content = formData.get("content");
+  const postId = formData.get("postId");
+
   const validatedFields = BlogFormSchema.safeParse({
-    title: formData.get("title"),
-    content: formData.get("content"),
-    postId: formData.get("postId"),
+    title,
+    content,
+    postId,
   });
 
-  //check if validation is success
+  //check if fields is success
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      title: formData.get("title"),
-      content: formData.get("content"),
+      title,
+      content,
     };
   }
 
   //find the post
   const postCollection = await getCollection("post");
-  let post;
-  post = await postCollection.findOne({
-    _id: ObjectId.createFromHexString(formData.get("postId")),
+  const post = await postCollection.findOne({
+    _id: ObjectId.createFromHexString(postId),
   });
 
-  //Update the post to Db
-  try {
-    post = await postCollection.findOneAndUpdate({
-      post,
+  //check if user owns post
+  if (user.userId !== post.userId.toString()) {
+    redirect("/");
+  }
+
+  //update post
+  await postCollection.findOneAndUpdate(
+    { _id: post._id },
+    {
       $set: {
         title: validatedFields.data.title,
         content: validatedFields.data.content,
       },
-    });
-  } catch (error) {
-    console.log("Failed to Update post");
-  }
-
-  //Redirect
-  redirect("/");
+    }
+  ),
+    //redirect
+    redirect("/");
 }
 
 //Delete post server action

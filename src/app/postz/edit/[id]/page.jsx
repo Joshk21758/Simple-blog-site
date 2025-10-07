@@ -1,3 +1,4 @@
+import { updatePost } from "@/actions/posts";
 import BlogForm from "@/components/BlogForm";
 import { authUser } from "@/lib/authUser";
 import { getCollection } from "@/lib/db";
@@ -5,7 +6,7 @@ import { ObjectId } from "mongodb";
 
 export default async function Edit({ params }) {
   //get route params
-  const { id } = params;
+  const { id } = await params;
 
   //get auth user
   const user = await authUser();
@@ -18,13 +19,26 @@ export default async function Edit({ params }) {
     });
     post = JSON.parse(JSON.stringify(post));
   } else {
+    console.log("Invalid post id");
     return null;
   }
+
+  console.log(post);
 
   return (
     <div>
       <p className="title">Edit your Post</p>
-      {post ? <BlogForm /> : <p>Post not found</p>}
+      {post ? (
+        <BlogForm handler={updatePost} post={post} />
+      ) : (
+        <p
+          style={{
+            fontSize: 50,
+          }}
+        >
+          Post not found
+        </p>
+      )}
     </div>
   );
 }

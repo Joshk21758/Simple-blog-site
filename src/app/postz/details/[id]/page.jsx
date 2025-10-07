@@ -5,7 +5,7 @@ import { ObjectId } from "mongodb";
 
 export default async function Details({ params }) {
   //get route params
-  const { id } = params;
+  const { id } = await params;
 
   //get auth user
   const user = await authUser();
@@ -13,13 +13,15 @@ export default async function Details({ params }) {
   const postCollection = await getCollection("post");
   let post;
   if (id.length === 24 && postCollection) {
-    post = await postCollection.findOne({
+    post = await postCollection?.findOne({
       _id: ObjectId.createFromHexString(id),
     });
     post = JSON.parse(JSON.stringify(post));
   } else {
+    console.log("Invalid post id");
     return null;
   }
+  console.log(post);
 
   return (
     <div>

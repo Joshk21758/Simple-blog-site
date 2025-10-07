@@ -3,15 +3,16 @@
 import { createPost } from "@/actions/posts";
 import { useActionState } from "react";
 
-export default function BlogForm({ post }) {
-  const [state, action, isPending] = useActionState(createPost, undefined);
+export default function BlogForm({ post, handler }) {
+  const [state, action, isPending] = useActionState(handler, undefined);
   return (
     <div>
       <form action={action} className="form-class">
+        <input type="hidden" name="postId" defaultValue={post?._id} />
         <input
           type="hidden"
           name="postId"
-          defaultValue={post?._id?.toString() || ""}
+          defaultValue={post?._id?.toString()}
         />
         <label className="label-class">Title</label>
         <input
