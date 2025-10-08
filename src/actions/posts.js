@@ -4,8 +4,8 @@ import { authUser } from "@/lib/authUser";
 import { getCollection } from "@/lib/db";
 import { BlogFormSchema } from "@/lib/schema";
 import { ObjectId } from "mongodb";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { z } from "zod";
 
 //create post server action
 export async function createPost(state, formData) {
@@ -35,13 +35,13 @@ export async function createPost(state, formData) {
 
   //Save post instance to Db
   const postCollection = await getCollection("post");
-  let post;
   try {
-    post = await postCollection.insertOne({
+    const post = {
       title: validatedFields.data.title,
       content: validatedFields.data.content,
       userId: ObjectId.createFromHexString(user.userId),
-    });
+    };
+    await postCollection.insertOne({ post });
   } catch (error) {
     console.log(error);
   }
@@ -110,4 +110,21 @@ export async function deletePost(formData) {
   if (!user) {
     redirect("/login");
   }
+
+  //find post to delete
+  const postCollection = await getCollection("post");
+  const post = await postCollection.findOne({
+    _id: ObjectId.createFromHexString(formData.get("postId")),
+  });
+
+  //check if user owns post
+  if (user.userId !== post.userId.toString()) {
+    return redirect("/");
+  }
+
+  //Delete the post
+  await postCollection.findOneAndDelete({ _id: post._id });
+
+  //revalidate path
+  revalidatePath("/dashboard");
 }

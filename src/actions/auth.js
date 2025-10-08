@@ -20,7 +20,6 @@ export async function register(state, formData) {
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      email: formData.get("email"),
     };
   }
 

@@ -334,3 +334,13 @@ body {
   background-color: #171717;
   color: aqua;
 }
+
+.delete-btn {
+  font-size: 30px;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: red;
+  width: 100px;
+  height: 50px;
+}
