@@ -1,5 +1,4 @@
 import PostCard from "@/components/PostCard";
-import { authUser } from "@/lib/authUser";
 import { getCollection } from "@/lib/db";
 import { ObjectId } from "mongodb";
 
@@ -7,10 +6,7 @@ export default async function Details({ params }) {
   //get route params
   const { id } = await params;
 
-  //get auth user
-  const user = await authUser();
-
-  const postCollection = await getCollection("post");
+  const postCollection = await getCollection("posts");
   let post;
   if (id.length === 24 && postCollection) {
     post = await postCollection?.findOne({
@@ -21,7 +17,6 @@ export default async function Details({ params }) {
     console.log("Invalid post id");
     return null;
   }
-  console.log(post);
 
   return (
     <div>

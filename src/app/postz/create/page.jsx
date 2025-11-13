@@ -7,7 +7,7 @@ export default function Create({ post }) {
       <p
         style={{
           fontSize: 45,
-          fontFamily: "sans",
+          fontFamily: "sans-serif",
           textAlign: "center",
           marginTop: 40,
           fontWeight: 700,

@@ -30,7 +30,7 @@ async function getDb(dbName) {
 
 //function to get collections
 export async function getCollection(colletionName) {
-  const db = await getDb("blogsite");
+  const db = await getDb("mynextapp");
   if (db) {
     return db.collection(colletionName);
   } else {

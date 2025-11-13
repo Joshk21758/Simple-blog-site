@@ -1,6 +1,5 @@
 import { updatePost } from "@/actions/posts";
 import BlogForm from "@/components/BlogForm";
-import { authUser } from "@/lib/authUser";
 import { getCollection } from "@/lib/db";
 import { ObjectId } from "mongodb";
 
@@ -8,10 +7,7 @@ export default async function Edit({ params }) {
   //get route params
   const { id } = await params;
 
-  //get auth user
-  const user = await authUser();
-
-  const postCollection = await getCollection("post");
+  const postCollection = await getCollection("posts");
   let post;
   if (id.length === 24 && postCollection) {
     post = await postCollection.findOne({
@@ -20,10 +16,7 @@ export default async function Edit({ params }) {
     post = JSON.parse(JSON.stringify(post));
   } else {
     console.log("Invalid post id");
-    return null;
   }
-
-  console.log(post);
 
   return (
     <div>

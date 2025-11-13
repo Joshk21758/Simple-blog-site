@@ -28,20 +28,18 @@ export async function createPost(state, formData) {
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      title,
-      content,
     };
   }
 
   //Save post instance to Db
-  const postCollection = await getCollection("post");
+  const postCollection = await getCollection("posts");
+  let post;
   try {
-    const post = {
+    post = await postCollection.insertOne({
       title: validatedFields.data.title,
       content: validatedFields.data.content,
       userId: ObjectId.createFromHexString(user.userId),
-    };
-    await postCollection.insertOne({ post });
+    });
   } catch (error) {
     console.log(error);
   }
@@ -73,21 +71,14 @@ export async function updatePost(state, formData) {
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      title,
-      content,
     };
   }
 
   //find the post
-  const postCollection = await getCollection("post");
+  const postCollection = await getCollection("posts");
   const post = await postCollection.findOne({
     _id: ObjectId.createFromHexString(postId),
   });
-
-  //check if user owns post
-  if (user.userId !== post.userId.toString()) {
-    redirect("/");
-  }
 
   //update post
   await postCollection.findOneAndUpdate(
@@ -112,7 +103,7 @@ export async function deletePost(formData) {
   }
 
   //find post to delete
-  const postCollection = await getCollection("post");
+  const postCollection = await getCollection("posts");
   const post = await postCollection.findOne({
     _id: ObjectId.createFromHexString(formData.get("postId")),
   });

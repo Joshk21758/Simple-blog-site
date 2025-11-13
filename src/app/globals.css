@@ -31,7 +31,7 @@ body {
   margin-top: 13px;
   font-weight: 700;
   margin-bottom: 13px;
-  font-family: serif;
+  font-family: sans-serif;
 }
 
 .header-class {
@@ -343,4 +343,11 @@ body {
   background-color: red;
   width: 100px;
   height: 50px;
+}
+
+.post_title {
+  font-size: 25px;
+  font-weight: 600;
+  color: black;
+  padding-left: 40px;
 }

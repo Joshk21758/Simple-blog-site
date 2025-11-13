@@ -27,7 +27,7 @@ export async function register(state, formData) {
   const { email, password } = validatedFields.data;
 
   //check if user collection exists
-  const userCollection = await getCollection("user");
+  const userCollection = await getCollection("users");
   if (!userCollection) {
     return {
       errors: {
@@ -86,7 +86,7 @@ export async function login(state, formData) {
   const { email, password } = validatedFields.data;
 
   // check if user collection exists
-  const userCollection = await getCollection("user");
+  const userCollection = await getCollection("users");
   if (!userCollection) {
     return {
       errors: {

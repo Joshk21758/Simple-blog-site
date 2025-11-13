@@ -3,14 +3,14 @@ import { getCollection } from "@/lib/db";
 
 export default async function Home() {
   //get post collection
-  const postCollection = await getCollection("post");
+  const postCollection = await getCollection("posts");
   const posts = await postCollection?.find().sort({ $natural: -1 }).toArray();
   return (
     <div>
       <p
         style={{
           fontSize: 40,
-          fontFamily: "sans",
+          fontFamily: "sans-serif",
           marginLeft: 40,
           marginTop: 40,
           fontWeight: 700,
